@@ -25,7 +25,7 @@ class TestResult {
     }
 
     static findByCustId(id) {
-        const query = "select id, hasil, tanggal, nilai_rujukan, jenis_pemeriksaan, keterangan from test_result where id = ?"
+        const query = "select id, hasil, tanggal, nilai_rujukan, jenis_pemeriksaan, keterangan from test_result where id_customer = ?"
         return new Promise((resolve, reject) => {
             conn.query(query, id, function (err, res, field) {
                 if (err) {
