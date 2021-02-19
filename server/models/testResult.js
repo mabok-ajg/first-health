@@ -13,7 +13,7 @@ class TestResult {
     }
 
     static getTestResultByCustId(cust_id) {
-        const query = "select * from test_result join customers on test_result.id_customer = customers.id where test_result.id_customer = ?"
+        const query = "select id, hasil, tanggal, nilai_rujukan, jenis_pemeriksaan, keterangan from test_result where id = ?"
         return new Promise((resolve, reject) => {
             conn.query(query, cust_id, function (err, res, field) {
                 if (err) {
