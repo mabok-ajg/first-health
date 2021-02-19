@@ -1,5 +1,4 @@
 const tr  = require('../models/testResult')
-const Customer = require('../models/customer')
 class TestResultController {
     static addTestResult(req, res, next) {
 	    req.body.tanggal = new Date().toISOString().slice(0, 10)
@@ -9,19 +8,22 @@ class TestResultController {
             })
             .catch(next)
     }
+    
+    static getAllResult(req, res, next) {
+	    tr.findAll()
+	    	.then( customers => {
+			res.status(200).json(customers)
+		})
+	    	.catch(next)
+    }
 
-    static getTestResultByCustId(req, res, next) {
-        tr.getTestResultByCustId(req.params.id)
+    static getTestResultId(req, res, next) {
+        tr.findByCustId(req.params.id)
             .then(tr => {
                 if (!tr) {
                     throw new Error("not found")
                 }
-		const cust = Customer.findById(req.params.id)
-		return Promise.all([cust, tr])
-            })
-	    .then(([cust, tr]) => {
-		    cust.results = tr
-		    res.status(200).json(cust)
+		res.status(200).json(tr)
 	    })
             .catch(next)
     }

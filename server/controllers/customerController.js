@@ -1,10 +1,25 @@
 const Customer = require('../models/customer')
+const tr = require('../models/testResult')
 const { validateNoHp } = require('../helper/validation')
 class CustomerController {
 	static getCustomers(req, res, next) {
 		Customer.findAll()
 			.then(customers => {
 				res.status(200).json({statusCode: 200, customers});
+			})
+			.catch(next)
+	}
+
+	static getTestResultByCustId(req, res, next) {
+		const id = req.params.id
+		Customer.findById(id)
+			.then( cust => {
+				const results = tr.findByCustId(id)
+				return Promise.all([cust, results])
+			})
+			.then(([cust, results]) => {
+				cust.results = results
+				res.status(200).json(cust)
 			})
 			.catch(next)
 	}
