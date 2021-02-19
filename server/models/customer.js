@@ -25,7 +25,7 @@ class Customer {
         })
     }
 
-    static findbyId(id) {
+    static findById(id) {
         const query = "select * from customers where id = ?"
         return new Promise((resolve, reject) => {
             conn.query(query, id, function(err, res, field) {
