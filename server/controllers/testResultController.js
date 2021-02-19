@@ -1,7 +1,7 @@
 const Customer = require('../models/testResult')
 class TestResultController {
     static addTestResult(req, res, next) {
-        console.log(req.body)
+	    req.body.tanggal = new Date().toISOString()
         Customer.addTestResult(req.body)
             .then(tr => {
                 res.status(201).json(tr)
