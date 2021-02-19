@@ -25,7 +25,6 @@ class CustomerController {
             }
             return next(err)
         }
-        console.log("masuk pak", "<<<")
 		Customer.create(req.body)
 			.then(cust => {
 				res.status(201).json({
