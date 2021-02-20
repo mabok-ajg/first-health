@@ -24,6 +24,14 @@ class CustomerController {
 			.catch(next)
 	}
 
+	static findByName(req, res, next) {
+		Customer.findByName(req.query.nama)
+			.then(customers => {
+				res.status(200).json(customers)
+			})
+			.catch(next)
+	}
+
 	static newCustomer(req, res, next) {
 		const fields = [ 'nama', 'umur', 'alamat', 'jenis_kelamin', 'no_hp', 'jenis_sample', 'suhu' ]
 		const emptyField = {}
