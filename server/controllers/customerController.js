@@ -29,7 +29,7 @@ class CustomerController {
 		const emptyField = {}
 		
 		for (const f of fields) {
-		    if (req.body[f] == undefined) {
+		    if (req.body[f] == undefined || req.body[f] == "") {
 			emptyField[f] = true
 		    }
 		}
