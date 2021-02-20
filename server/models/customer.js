@@ -14,9 +14,9 @@ class Customer {
     }
 
     static findByName(name) {
-        const query = "select * from customer where nama like '%?%'"
+        const query = "select * from customers where nama like '%"+name+"%'"
         return new Promise((resolve, reject) => {
-            conn.query(query, [name], function(err, res, field) {
+            conn.query(query, function(err, res, field) {
                 if (err) {
                     reject(err)
                 }
