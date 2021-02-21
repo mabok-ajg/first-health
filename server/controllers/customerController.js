@@ -25,8 +25,8 @@ class CustomerController {
 	}
 
 	static findByName(req, res, next) {
-		const nama = req.query.nama
-		Customer.findByName(String(nama))
+		const nama = req.query.nama.toLowerCase()
+		Customer.findByName(nama)
 			.then(customers => {
 				res.status(200).json(customers)
 			})
