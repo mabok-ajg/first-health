@@ -1,6 +1,21 @@
 const tr  = require('../models/testResult')
 class TestResultController {
     static addTestResult(req, res, next) {
+	const fields = ['hasil', 'tanggal', 'nilai_rujukan', 'jenis_pemeriksaan', 'keterangan', 'id_customers']
+    const emptyField = {}
+	
+	for (const f of fields) {
+	    if (req.body[f] == undefined || req.body[f] == "") {
+		emptyField[f] = true
+	    }
+	}
+	if (Object.keys(emptyField).length !== 0 && emptyField.constructor === Object) {
+	    let err = {
+		code: "MISSING_FIELD",
+		field: emptyField
+	    }
+	    return next(err)
+	}
 	    req.body.tanggal = new Date().toISOString().slice(0, 10)
         tr.addTestResult(req.body)
             .then(tr => {

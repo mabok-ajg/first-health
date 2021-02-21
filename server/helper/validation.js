@@ -4,4 +4,5 @@ function validateNoHp(no_hp) {
 	}
 }
 
+
 module.exports = { validateNoHp }
