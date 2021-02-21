@@ -1,6 +1,7 @@
 const tr  = require('../models/testResult')
 class TestResultController {
     static addTestResult(req, res, next) {
+	    req.body.tanggal = new Date().toISOString().slice(0, 10)
 	const fields = ['hasil', 'tanggal', 'nilai_rujukan', 'jenis_pemeriksaan', 'keterangan', 'id_customer']
     const emptyField = {}
 	
@@ -16,7 +17,6 @@ class TestResultController {
 	    }
 	    return next(err)
 	}
-	    req.body.tanggal = new Date().toISOString().slice(0, 10)
         tr.addTestResult(req.body)
             .then(tr => {
                 res.status(201).json(tr)
