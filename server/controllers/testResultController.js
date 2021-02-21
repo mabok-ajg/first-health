@@ -1,7 +1,7 @@
 const tr  = require('../models/testResult')
 class TestResultController {
     static addTestResult(req, res, next) {
-	const fields = ['hasil', 'tanggal', 'nilai_rujukan', 'jenis_pemeriksaan', 'keterangan', 'id_customers']
+	const fields = ['hasil', 'tanggal', 'nilai_rujukan', 'jenis_pemeriksaan', 'keterangan', 'id_customer']
     const emptyField = {}
 	
 	for (const f of fields) {
