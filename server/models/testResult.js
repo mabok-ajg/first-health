@@ -35,5 +35,17 @@ class TestResult {
             })
         })
     }
+
+    static deleteByCustId(id) {
+        const query = "delete from test_result where id_customer = ?"
+        return new Promise((resolve, reject) => {
+            conn.query(query, id, function (err, res, field) {
+                if(err) {
+                    reject(err)
+                }
+                resolve(res)
+            })
+        })
+    }
 }
 module.exports = TestResult

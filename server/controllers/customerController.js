@@ -75,17 +75,12 @@ class CustomerController {
 
 	static delCustomer(req, res, next) {
 		const {id} = req.params
-		Customer.deleteById(id)
-			.then(data => {
-				if (data.affectedRows == 0) {
-					res.locals.id = id
-					throw new Error('not found')
-				}
-				res.status(200).json({
-					msg: "berhasil menghapus record",
-					statusCode: 200,
-					data
-				})
+		tr.deleteByCustId(id)
+			.then(ok => {
+				return Customer.deleteById(id)
+			})
+			.then(success => {
+				res.status(200).json(success)
 			})
 			.catch(next)
 	}
